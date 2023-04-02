@@ -3,7 +3,7 @@ package cat.content.randomcat.api.cat
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import java.io.InputStream
+import org.telegram.telegrambots.meta.api.objects.InputFile
 import java.net.URL
 
 
@@ -13,9 +13,8 @@ class CatApi(
 ) {
     private val logger = KotlinLogging.logger { }
 
-    fun getGif(): InputStream? {
+    suspend fun getGif(): InputFile {
         logger.debug { "Getting random cat gif from $gifUrl" }
-        val gif = URL(gifUrl).openStream()
-        return gif
+        return InputFile(URL(gifUrl).openStream(), "cat-gif.gif")
     }
 }

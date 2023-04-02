@@ -1,5 +1,6 @@
 package cat.content.randomcat.bot.impl
 
+import cat.content.randomcat.api.cat.CatApi
 import cat.content.randomcat.bot.TelegramBot
 import cat.content.randomcat.command.CatBotCommand
 import lombok.AllArgsConstructor
@@ -13,6 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 @AllArgsConstructor
 class CatBot(
     commands: List<CatBotCommand>,
+    val catApi: CatApi,
     @Value("\${bot.cat-bot.username}") private var username: String,
     @Value("\${bot.cat-bot.token}") private var token: String
 ) : TelegramBot, TelegramLongPollingCommandBot() {
@@ -29,11 +31,11 @@ class CatBot(
         return username
     }
 
-    override fun getBotToken(): String {
-        return token
+    override fun processNonCommandUpdate(update: Update?) {
+        TODO("Not yet implemented")
     }
 
-    override fun processNonCommandUpdate(update: Update?) {
-        // disable
+    override fun getBotToken(): String {
+        return token
     }
 }
