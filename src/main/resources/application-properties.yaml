@@ -1,0 +1,9 @@
+bot:
+  cat-bot:
+    username: 'infcatbot'
+    api:
+      random-cat-gif: 'https://cataas.com/cat/gif'
+    command:
+      random-cat-gif:
+        command: 'cat'
+        description: 'Send random gif with cat'
