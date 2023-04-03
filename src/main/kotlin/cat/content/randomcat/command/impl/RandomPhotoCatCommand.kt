@@ -11,26 +11,27 @@ import lombok.AllArgsConstructor
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import org.telegram.telegrambots.meta.api.methods.send.SendAnimation
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto
 import org.telegram.telegrambots.meta.api.objects.Chat
 import org.telegram.telegrambots.meta.api.objects.User
 import org.telegram.telegrambots.meta.bots.AbsSender
 
 
+@DelicateCoroutinesApi
 @Component
 @AllArgsConstructor
-class RandomGifCatCommand(
+class RandomPhotoCatCommand(
     val catApi: CatApi,
-    @Value("\${bot.cat-bot.command.random-cat-gif.command}") private val command: String,
-    @Value("\${bot.cat-bot.command.random-cat-gif.description}") private val description: String
+    @Value("\${bot.cat-bot.command.random-cat-photo.command}") private val command: String,
+    @Value("\${bot.cat-bot.command.random-cat-photo.description}") private val description: String
 ) : CatBotCommand(command, description) {
     private val logger = KotlinLogging.logger { }
 
     override fun execute(absSender: AbsSender?, user: User?, chat: Chat?, arguments: Array<out String>?) {
         executeWrapper(TelegramContext(absSender, user, chat, arguments)) { context ->
-            val gif = catApi.getGif()
-            val sendAnimation = SendAnimation(context.chat?.id.toString(), gif)
-            logger.debug { "Sending random cat gif via /$command command" }
+            val photo = catApi.getPhoto()
+            val sendAnimation = SendPhoto(context.chat?.id.toString(), photo)
+            logger.debug { "Sending random cat photo via /$command command" }
             absSender?.executeAsync(sendAnimation)
         }
     }
