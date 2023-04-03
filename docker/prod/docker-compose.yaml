@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   cat-telegram-bot:
-    build: ../../
+    image: catbot
     restart: always
     environment:
       SPRING_PROFILES_ACTIVE: prod

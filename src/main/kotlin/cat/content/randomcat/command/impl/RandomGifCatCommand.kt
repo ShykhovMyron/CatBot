@@ -10,10 +10,11 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.send.SendAnimation
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Chat
 import org.telegram.telegrambots.meta.api.objects.User
 import org.telegram.telegrambots.meta.bots.AbsSender
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException
+import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException
 
 
 @Component
@@ -33,10 +34,11 @@ class RandomGifCatCommand(
                 val sendAnimation = SendAnimation(chatId, gif)
                 logger.debug { "Sending random cat gif via /$command command" }
                 absSender?.execute(sendAnimation)
-            } catch (e: TelegramApiException) {
-                logger.warn { "Telegram API error while sending random cat gif\n${e.localizedMessage}" }
+            } catch (e: TelegramApiRequestException) {
+                logger.warn { "Telegram API error while sending random cat gif\n\t${e.apiResponse}" }
+                absSender?.execute(SendMessage(chatId, e.apiResponse))
             } catch (e: Exception) {
-                logger.info { "Error while sending random cat gif\n${e.localizedMessage}" }
+                logger.warn { "Error while sending random cat gif\n${e.localizedMessage}" }
             }
         }
     }
