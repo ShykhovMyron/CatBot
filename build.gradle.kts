@@ -26,12 +26,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.bucket4j:bucket4j-core:8.2.0")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
     implementation("org.telegram:telegrambots:6.5.0")
     implementation("org.telegram:telegrambotsextensions:6.5.0")
