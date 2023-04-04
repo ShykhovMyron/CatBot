@@ -5,7 +5,6 @@ package cat.content.randomcat.command.impl
 import cat.content.randomcat.command.CatBotCommand
 import cat.content.randomcat.command.TelegramContext
 import cat.content.randomcat.command.executeWrapper
-import cat.content.randomcat.time.TimeTracker
 import kotlinx.coroutines.DelicateCoroutinesApi
 import lombok.AllArgsConstructor
 import mu.KotlinLogging
@@ -33,9 +32,7 @@ class RandomStickerCatCommand(
 
     override fun execute(absSender: AbsSender?, user: User?, chat: Chat?, arguments: Array<out String>?) {
         executeWrapper(TelegramContext(absSender, user, chat, arguments), command) { context ->
-            val time = TimeTracker()
             val randomSticker = getAllStickers(context.absSender).shuffled().firstOrNull()
-            time.timeAndReset()
             absSender?.execute(SendSticker().also {
                 it.chatId = chat?.id.toString()
                 it.sticker = InputFile(randomSticker?.fileId)
