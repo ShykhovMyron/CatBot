@@ -20,16 +20,6 @@ fun executeWrapper(
     command: String,
     executeFunction: suspend (TelegramContext) -> Unit
 ) {
-    if (context.chat != null && !checkChat(context.chat.id, command)) {
-        logger.warn { "User ${context.chat.firstName} get messages limit per minute for command '/$command'" }
-        context.absSender?.executeAsync(
-            SendMessage(
-                context.chat.id.toString(), "You get messages limit per minute for /$command\n" +
-                        "Time left: ${checkTimeLeft(context.chat.id, command)} sec"
-            )
-        )
-        return
-    }
     GlobalScope.launch {
         logger.debug { "User '${context.chat?.firstName ?: ""}', command '/$command'" }
         val chatId = context.chat?.id.toString()
