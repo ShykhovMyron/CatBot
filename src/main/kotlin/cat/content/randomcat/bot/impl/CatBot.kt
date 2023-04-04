@@ -21,8 +21,8 @@ class CatBot(
     init {
         for (command in commands) {
             register(command)
-            logger.info { "Bot with username '$username' loaded successfully" }
         }
+        logger.info { "Bot with username '$username' loaded successfully" }
     }
 
     override fun getBotUsername(): String {

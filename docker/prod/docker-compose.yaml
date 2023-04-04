@@ -7,4 +7,4 @@ services:
     restart: always
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      CAT_BOT_TOKEN: "TOCKEN"
+      CAT_BOT_TOKEN: "TOKEN"

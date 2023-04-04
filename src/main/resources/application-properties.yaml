@@ -3,7 +3,16 @@ bot:
     username: 'infcatbot'
     api:
       random-cat-gif: 'https://cataas.com/cat/gif'
+      random-cat: 'https://cataas.com/cat'
+      max-file-size: '5' #MB
     command:
+      random-cat-photo:
+        command: 'photo'
+        description: 'Send random photo with cat'
       random-cat-gif:
-        command: 'cat'
+        command: 'gif'
         description: 'Send random gif with cat'
+      random-cat-sticker:
+        command: 'sticker'
+        description: 'Send random sticker with cat'
+        sticker-pucks: 'kittysforlife_by_fStikBot, gogoli_pack_4, HANGSEED9, ilkvv, kotikinu, anyaandkatyapm, StyedPromsPooks_by_fStikBot, Pussy_Cars, kittiesbynorufx_by_fStikBot'
