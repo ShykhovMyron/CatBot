@@ -2,12 +2,13 @@
 
 #### Preview https://t.me/infcatbot
 
-CatBot is a simple Telegram bot that sends you a random cat GIF using the https://cataas.com API.
+CatBot is a simple Telegram bot that sends you a random cat media.
 
 Commands:
 
-- Send the `/photo` command to the bot in Telegram to receive a random photo with cat.
-- Send the `/gif` command to the bot in Telegram to receive a random gif with cat.
+- `/photo` to receive random photo with cat.
+- `/gif` to receive random gif with cat.
+- `/stiker` to receive random sticker with cat
 
 [//]: # (## Prerequisites)
 
