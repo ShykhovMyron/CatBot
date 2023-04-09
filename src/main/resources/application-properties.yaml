@@ -2,8 +2,8 @@ bot:
   cat-bot:
     username: 'infcatbot'
     api:
-      random-cat-gif: 'https://cataas.com/cat/gif'
-      random-cat: 'https://cataas.com/cat'
+      random-cat-gif: 'https://cataas.com/cat/gif1231'
+      random-cat: 'https://cataas.com/cat12312'
       max-file-size: '5' #MB
     command:
       random-cat-photo:

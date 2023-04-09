@@ -2,12 +2,14 @@ package cat.content.randomcat.api.cat
 
 import cat.content.randomcat.exeption.impl.CatApiException
 import mu.KotlinLogging
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.telegram.telegrambots.meta.api.objects.InputFile
 import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import java.util.concurrent.TimeUnit
 
 
 @Service
@@ -30,21 +32,35 @@ class CatApi(
 
     @Throws(CatApiException::class)
     private fun getInputStream(url: String, type: String = ""): InputStream {
-        try {
-            val urlConnection = URL(url).openConnection() as HttpURLConnection
-            urlConnection.requestMethod = "GET"
-            urlConnection.connectTimeout = 5000
-            urlConnection.readTimeout = 5000
-            val contentType = urlConnection.getHeaderField("Content-Type")
-            val contentLength = urlConnection.getHeaderField("Content-Length")?.toLong() ?: 0
+        val client = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .build()
 
-            return if (contentType != null && contentType.startsWith(type) && contentLength < maxFileSize * 1024 * 1024) {
-                urlConnection.inputStream
-            } else {
-                getInputStream(url, type)
-            }
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        try {
+            return client.newCall(request).getResponse(type)
         } catch (e: Exception) {
             throw CatApiException("Error while fetching data from cat api")
+        }
+    }
+
+    private fun Call.getResponse(type: String): InputStream {
+        val response = this.execute()
+        if (!response.isSuccessful) {
+            logger.warn { "Unexpected code $response" }
+            throw IllegalArgumentException()
+        }
+        val contentType = response.header("Content-Type")
+        val contentLength = response.header("Content-Length")?.toLong() ?: 0
+
+        return if (contentType != null && contentType.startsWith(type) && contentLength < maxFileSize * 1024 * 1024) {
+            response.body!!.byteStream()
+        } else {
+            getResponse(type)
         }
     }
 }
