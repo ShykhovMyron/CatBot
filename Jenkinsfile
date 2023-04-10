@@ -47,6 +47,13 @@ pipeline {
                 }
                 stage("Deploy to Remote Machine") {
                     stages {
+                        stage("Login into Docker hub on remote machine") {
+                            steps {
+                                withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: "DOCKER_HUB_USERNAME", passwordVariable: "DOCKER_HUB_PASSWORD")]) {
+                                    runSSHCommand("docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}")
+                                }
+                            }
+                        }
                         stage("Crete working directory if not exist") {
                             steps {
                                 runSSHCommand("mkdir -p \$(dirname '${PATH_TO_REMOTE_HOME_DIR}${PATH_TO_REMOTE_DOCKER_COMPOSE}')")
