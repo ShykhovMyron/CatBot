@@ -38,3 +38,5 @@ out/
 
 ### CUSTOM ###
 /src/main/kotlin/cat/content/randomcat/time/
+/src/main/resources/application-dev.yaml
+/lib/

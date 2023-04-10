@@ -32,6 +32,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
     implementation("org.telegram:telegrambots:6.5.0")
     implementation("org.telegram:telegrambotsextensions:6.5.0")
 
