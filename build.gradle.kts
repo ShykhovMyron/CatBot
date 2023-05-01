@@ -38,6 +38,8 @@ dependencies {
     implementation("org.telegram:telegrambotsextensions:6.5.0")
 
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+
+    testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
 tasks.withType<KotlinCompile> {
