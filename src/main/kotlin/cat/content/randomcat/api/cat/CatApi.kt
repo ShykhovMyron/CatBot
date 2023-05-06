@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit
 
 @Service
 class CatApi(
-    @Value("\${bot.cat-bot.api.random-cat-gif}") private var gifCatUrl: String,
-    @Value("\${bot.cat-bot.api.random-cat}") private var anyCatUrl: String,
-    @Value("\${bot.cat-bot.api.max-file-size}") private var maxFileSize: Int
+    @Value("\${bot.cat-bot.api.cat.random-cat-gif}") private var gifCatUrl: String,
+    @Value("\${bot.cat-bot.api.cat.random-cat}") private var anyCatUrl: String,
+    @Value("\${bot.cat-bot.api.cat.max-file-size}") private var maxFileSize: Int
 ) {
     private val logger = KotlinLogging.logger { }
 
@@ -44,7 +44,8 @@ class CatApi(
         try {
             return client.newCall(request).getResponse(type)
         } catch (e: Exception) {
-            throw CatApiException("Error while fetching data from cat api")
+            e.printStackTrace()
+            throw CatApiException("Error while fetching data from cat api ($url)")
         }
     }
 
