@@ -21,7 +21,7 @@ fun executeWrapper(
     executeFunction: suspend (TelegramContext) -> Unit
 ) {
     GlobalScope.launch {
-        logger.debug { "User '${context.chat?.firstName ?: ""}', command '/$command'" }
+        logger.info { "User '${context.chat?.firstName ?: ""}', command '/$command'" }
         val chatId = context.chat?.id.toString()
         try {
             executeFunction(context)

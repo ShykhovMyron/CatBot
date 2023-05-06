@@ -9,6 +9,12 @@ Commands:
 - `/photo` to receive random photo with cat.
 - `/gif` to receive random gif with cat.
 - `/stiker` to receive random sticker with cat
+- `/fact` to receive random fact about cat
+
+API(s):
+
+- `https://cataas.com`
+- `https://cat-fact.herokuapp.com`
 
 [//]: # (## Prerequisites)
 

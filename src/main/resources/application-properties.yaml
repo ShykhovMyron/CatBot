@@ -2,10 +2,19 @@ bot:
   cat-bot:
     username: 'infcatbot'
     api:
-      random-cat-gif: 'https://cataas.com/cat/gif'
-      random-cat: 'https://cataas.com/cat'
-      max-file-size: '5' #MB
+      cat:
+        random-cat-gif: 'https://cataas.com/cat/gif'
+        random-cat: 'https://cataas.com/cat'
+        max-file-size: '5' #MB
+      fact:
+        random-fact: 'https://cat-fact.herokuapp.com/facts/random'
+        type: 'cat'
+        amount: '10'
+        verified: true
     command:
+      random-cat-fact:
+        command: 'fact'
+        description: 'Send random fact with cat'
       random-cat-photo:
         command: 'photo'
         description: 'Send random photo with cat'
