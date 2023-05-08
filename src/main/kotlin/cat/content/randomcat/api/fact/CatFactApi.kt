@@ -27,8 +27,8 @@ class CatFactApi(
                     HttpMethod.GET
                 )?.filter { verified && it.status.verified == true } ?: emptyList()
 
-                if (catFacts.isNotEmpty()) {
-                    return@getFacts
+                if (catFacts.isEmpty()) {
+                    getFacts()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

@@ -25,7 +25,7 @@ import org.telegram.telegrambots.meta.bots.AbsSender
 class RandomStickerCatCommand(
     @Value("\${bot.cat-bot.command.random-cat-sticker.command}") private val command: String,
     @Value("\${bot.cat-bot.command.random-cat-sticker.description}") private val description: String,
-    @Value("#{'\${bot.cat-bot.command.random-cat-sticker.sticker-pucks}'.split(',')}") private val stickerPuckIds: List<String>
+    @Value("#{'\${bot.cat-bot.command.random-cat-sticker.sticker-packs}'.split(',')}") private val stickerPackIds: List<String>
 ) : CatBotCommand(command, description) {
     private val logger = KotlinLogging.logger { }
     private val stickerPuck: MutableSet<Sticker> = mutableSetOf()
@@ -42,7 +42,7 @@ class RandomStickerCatCommand(
 
     private fun getAllStickers(absSender: AbsSender?): Set<Sticker> {
         if (stickerPuck.isEmpty()) {
-            stickerPuck.addAll(stickerPuckIds.flatMap {
+            stickerPuck.addAll(stickerPackIds.flatMap {
                 try {
                     absSender?.execute(GetStickerSet(it))?.stickers ?: emptyList()
                 } catch (e: Exception) {
