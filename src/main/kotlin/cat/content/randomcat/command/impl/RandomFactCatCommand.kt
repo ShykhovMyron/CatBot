@@ -27,10 +27,12 @@ class RandomFactCatCommand(
 
     override fun execute(absSender: AbsSender?, user: User?, chat: Chat?, arguments: Array<out String>?) {
         executeWrapper(TelegramContext(absSender, user, chat, arguments), command) { context ->
+            val fact = catFactApi.randomFact().text
+
             context.absSender?.executeAsync(
                 SendMessage(
                     context.chat?.id.toString(),
-                    catFactApi.randomFact().text
+                    fact
                 )
             )
         }
