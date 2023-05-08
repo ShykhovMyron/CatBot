@@ -9,7 +9,7 @@ bot:
       fact:
         random-fact: 'https://cat-fact.herokuapp.com/facts/random'
         type: 'cat'
-        amount: '100'
+        amount: '10'
         verified: true
     command:
       random-cat-fact:
