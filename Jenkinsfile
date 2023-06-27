@@ -22,7 +22,7 @@ pipeline {
             stages {
                 stage("Clone CatBot-master repo") {
                     steps {
-                        dir(TEMP_DIR) {
+                        dir("/tmp/jenkins-temp-dir") {
                             git branch: "master",
                                     credentialsId: "${GIT_CREDENTIALS_ID}",
                                     url: "${GIT_REPOSITORY}"

@@ -30,7 +30,7 @@ class CatBot(
     }
 
     override fun processNonCommandUpdate(update: Update?) {
-        //disable
+
     }
 
     @Deprecated("Deprecated in Java")
